@@ -52,8 +52,7 @@ class Handler extends ExceptionHandler
             'message' => $exception->getMessage(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
-            'trace' => $simplifiedTrace,
-            'debug' => config('app')['debug']
+            'trace' => $simplifiedTrace
         ];
         // 记录错误日志
         $date = Carbon::now()->timezone(config('app')['default_timezone'])->format('Y-m-d');
@@ -70,7 +69,7 @@ class Handler extends ExceptionHandler
         ]);
         // 返回数据
         $code = $exception->getCode() == 0 ? 500 : $exception->getCode();
-        $json = ['code' => $code, 'message' => config('app')['debug'] ? $exception->getMessage() : 'Server internal error', 'data' => config('app')['debug'] ? $cleanedException : (object)[]];
+        $json = ['code' => $code, 'message' => config('app')['debug'] == 1 ? $exception->getMessage() : 'Server internal error', 'data' => config('app')['debug'] == 1 ? $cleanedException : (object)[]];
         return new Response(200, ['Content-Type' => 'application/json'], json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 }
