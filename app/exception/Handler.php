@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
         $date = Carbon::now()->timezone(config('app')['default_timezone'])->format('Y-m-d');
         $log = new Log\Logger([
             new Log\Handlers\FileHandler(runtime_path("logs/{$date}/重点关注")),
-            new Log\Handlers\RemoteApiHandler('http://8.210.141.97:9999/write')
+            // new Log\Handlers\RemoteApiHandler()
         ]);
         $log->error('未定义异常', $exception->getMessage(), [
             'project' => config('app')['app_name'],

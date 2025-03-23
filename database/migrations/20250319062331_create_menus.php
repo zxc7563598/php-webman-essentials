@@ -203,6 +203,24 @@ final class CreateMenus extends AbstractMigration
                 'updated_at' => time(),
                 'deleted_at' => NULL
             ],
+            [
+                'id' => 10,
+                'code' => 'iFrame',
+                'enable' => 1,
+                'show' => 1,
+                'keep_alive' => 0,
+                'layout' => '',
+                'type' => 'MENU',
+                'parent_id' => 0,
+                'name' => '外部链接',
+                'icon' => 'i-fe:insert-link',
+                'path' => 'https://hejunjie.life',
+                'component' => '',
+                'order' => 0,
+                'created_at' => time(),
+                'updated_at' => time(),
+                'deleted_at' => NULL
+            ],
         ];
         $table->insert($rows)->saveData();
     }
