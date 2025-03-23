@@ -14,7 +14,7 @@
 ## 安装与使用
 
 ### 环境要求
-- PHP >= 7.4
+- PHP >= 8.1
 - Composer
 - Swoole（可选，如果需要启用 Swoole 协程）
 
