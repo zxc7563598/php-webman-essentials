@@ -52,7 +52,8 @@ class Handler extends ExceptionHandler
             'message' => $exception->getMessage(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
-            'trace' => $simplifiedTrace
+            'trace' => $simplifiedTrace,
+            'debug' => config('app')['debug']
         ];
         // 记录错误日志
         $date = Carbon::now()->timezone(config('app')['default_timezone'])->format('Y-m-d');
