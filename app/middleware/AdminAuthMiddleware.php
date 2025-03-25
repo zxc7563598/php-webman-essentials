@@ -38,7 +38,7 @@ class AdminAuthMiddleware implements MiddlewareInterface
         // 完成签名验证,传递数据
         $request->data = json_decode($data, true);
         // 验证用户登录
-        $token = $request->header('accesstoken') ?? null;
+        $token = $request->header('X-Auth-Token') ?? null;
         $request->admins = null;
         $whitelisting = [
             '/admin-api/auth/login',
