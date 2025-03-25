@@ -48,6 +48,7 @@ Route::group('/admin-api', function () { // 后台管理系统接口
     Route::post('/permissions/role/users', [AdminApi\AdminPermissionController::class, 'assignUsersToRole'])->name('[权限管理-角色与用户绑定]');
 })->middleware([
     app\middleware\AccessMiddleware::class,
+    app\middleware\LangMiddleware::class,
     app\middleware\AdminAuthMiddleware::class
 ]);
 
@@ -58,7 +59,7 @@ Route::options('[{path:.+}]', function () {
             'Access-Control-Allow-Credentials' => 'true',
             'Access-Control-Allow-Origin' => '*',
             'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers' => 'Content-Type, accessToken',
+            'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, Accept-Language',
         ]);
 });
 

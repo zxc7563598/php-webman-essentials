@@ -22,7 +22,7 @@ function success($request, $data = [], $message = ''): Response
 {
     $request->res = [
         'code' => 0,
-        'message' => !empty($message) ? $message : (config('code')[0] ?? 'error'),
+        'message' => !empty($message) ? $message : (trans(config('code')[0]) ?? 'error'),
         'data' => empty($data) ? [] : $data
     ];
     return json($request->res, JSON_UNESCAPED_UNICODE + JSON_UNESCAPED_SLASHES + JSON_PRESERVE_ZERO_FRACTION);
@@ -41,7 +41,7 @@ function fail($request, $code = 500, $data = [], $message = ''): Response
     // 记录错误信息
     $request->res = [
         'code' => $code,
-        'message' => !empty($message) ? $message : (config('code')[$code] ?? 'error'),
+        'message' => !empty($message) ? $message : (trans(config('code')[$code]) ?? 'error'),
         'data' => empty($data) ? [] : $data
     ];
     return json($request->res, JSON_UNESCAPED_UNICODE + JSON_UNESCAPED_SLASHES + JSON_PRESERVE_ZERO_FRACTION);
