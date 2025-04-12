@@ -7,7 +7,8 @@
 
 use Carbon\Carbon;
 use Carbon\Exceptions\InvalidTimeZoneException;
-use Hejunjie\Tools\Log;
+use Hejunjie\ErrorLog\Logger;
+use Hejunjie\ErrorLog\Handlers;
 use support\Response;
 
 /**
@@ -59,9 +60,9 @@ function fail($request, $code = 500, $data = [], $message = ''): Response
 function sublog($paths, $title, $message, $context): void
 {
     $date = Carbon::now()->timezone(config('app')['default_timezone'])->format('Y-m-d');
-    $log = new Log\Logger([
-        new Log\Handlers\FileHandler(runtime_path("logs/{$date}/{$paths}")),
-        new Log\Handlers\ConsoleHandler()
+    $log = new Logger([
+        new Handlers\FileHandler(runtime_path("logs/{$date}/{$paths}")),
+        new Handlers\ConsoleHandler()
     ]);
     $log->info($title, $message, $context);
 }
