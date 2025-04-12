@@ -3,9 +3,9 @@
 namespace app\cache;
 
 use app\model\Admins;
-use Hejunjie\Tools\Cache\Interfaces\DataSourceInterface;
+use Hejunjie\Cache\Interfaces\DataSourceInterface;
 
-class AdminLoginCache  implements \Hejunjie\Tools\Cache\Interfaces\DataSourceInterface
+class AdminLoginCache  implements \Hejunjie\Cache\Interfaces\DataSourceInterface
 {
     protected DataSourceInterface $wrapped;
 

@@ -4,7 +4,7 @@ namespace app\service;
 
 use app\model\Admins;
 use app\cache\AdminLoginCache;
-use Hejunjie\Tools\Cache\Decorators;
+use Hejunjie\Cache;
 use resource\enums\AdminsEnums;
 
 class AdminAuthService
@@ -68,8 +68,8 @@ class AdminAuthService
      */
     public static function getCache(): object
     {
-        return new Decorators\RedisCache(
-            new Decorators\FileCache(
+        return new Cache\RedisCache(
+            new Cache\FileCache(
                 new AdminLoginCache(),
                 runtime_path('admin/login'),
                 (3600 * 24 * 7)
