@@ -36,6 +36,11 @@ class AdminAuthService
         if (sha1(sha1($password) . $admins->salt) != $admins->password) {
             return 900006;
         }
+        // 清除旧token
+        if ($admins->token) {
+            $cache = self::getCache();
+            $cache->del($admins->token);
+        }
         // 生成token
         $token = md5(mt_rand(1000, 9999) . uniqid(md5(microtime(true)), true));
         // 存储登录信息
