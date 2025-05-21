@@ -17,6 +17,7 @@ use support\Request;
 return [
     'debug' => getenv('DEBUG'),
     'app_name' => getenv('APP_NAME'),
+    'error_webhook_url' => getenv('ERROR_WEBHOOK_URL'),
     'error_reporting' => E_ALL,
     'default_timezone' => getenv('TIMEZONE'),
     'request_class' => Request::class,
