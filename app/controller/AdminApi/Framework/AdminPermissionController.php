@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controller\AdminApi;
+namespace app\controller\AdminApi\Framework;
 
 use app\model\AdminRoles;
 use app\model\Menus;
