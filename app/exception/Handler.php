@@ -28,15 +28,15 @@ class Handler extends ExceptionHandler
             return;
         }
         $request = request();
-        $date = Carbon::now()->timezone(config('app')['default_timezone'])->format('Y-m-d');
+        $date = Carbon::now()->timezone(config('app.default_timezone'))->format('Y-m-d');
         $handlers = [
             new Handlers\FileHandler(runtime_path("logs/{$date}/重点关注"))
         ];
-        if (config('app')['error_webhook_url']) {
-            $handlers[] = new Handlers\RemoteApiHandler(config('app')['error_webhook_url']);
+        if (config('app.error_webhook_url')) {
+            $handlers[] = new Handlers\RemoteApiHandler(config('app.error_webhook_url'));
         }
         (new Logger($handlers))->error('未定义异常', $exception->getMessage(), [
-            'project' => config('app')['app_name'],
+            'project' => config('app.app_name'),
             'ip' => $request->getRealIp(),
             'method' => $request->method(),
             'full_url' => $request->fullUrl(),
@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
 
     public function render(Request $request, Throwable $exception): Response
     {
-        $isDebug = config('app')['debug'] == 1;
+        $isDebug = config('app.debug') == 1;
         $statusCode = $this->getHttpStatusCode($exception);
         $response = [
             'code' => $this->getErrorCode($exception),

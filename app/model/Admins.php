@@ -3,6 +3,7 @@
 namespace app\model;
 
 use app\service\AdminAuthService;
+use app\utils\AdminCache;
 use support\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -63,8 +64,7 @@ class Admins extends Model
             }
             // 如果用户登录，清除缓存信息
             if (!empty($model->token)) {
-                $cache = AdminAuthService::getCache();
-                $cache->del($model->token);
+                AdminCache::get()->del($model->token);
             }
         });
     }

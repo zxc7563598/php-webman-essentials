@@ -76,7 +76,7 @@ class AdminUserController
             $_list->roles = $_list->roles->toArray();
             $_list->enable = $_list->enable == AdminsEnums\Enable::Enable->value;
             $_list->createTime = $_list->created_at->timezone('Asia/Shanghai')->format('Y-m-d H:i:s');
-            $_list->updateTime = Carbon::parse($_list->updated_at)->timezone(config('app')['default_timezone'])->format('Y-m-d H:i:s');
+            $_list->updateTime = Carbon::parse($_list->updated_at)->timezone(config('app.default_timezone'))->format('Y-m-d H:i:s');
             unset($_list->created_at);
             unset($_list->updated_at);
         }
@@ -121,8 +121,8 @@ class AdminUserController
             'id' => $request->admins['id'],
             'username' => $request->admins['username'],
             'enable' => $request->admins['enable'] == AdminsEnums\Enable::Enable->value,
-            'createTime' => Carbon::parse($request->admins['created_at'])->timezone(config('app')['default_timezone'])->format('Y-m-d H:i:s'),
-            'updateTime' => Carbon::parse($request->admins['updated_at'])->timezone(config('app')['default_timezone'])->format('Y-m-d H:i:s'),
+            'createTime' => Carbon::parse($request->admins['created_at'])->timezone(config('app.default_timezone'))->format('Y-m-d H:i:s'),
+            'updateTime' => Carbon::parse($request->admins['updated_at'])->timezone(config('app.default_timezone'))->format('Y-m-d H:i:s'),
             'profile' => [
                 'id' => $request->admins['id'],
                 'nickName' => $request->admins['nickname'],
@@ -186,8 +186,8 @@ class AdminUserController
                 $insert[] = [
                     'admin_id' => $admins->id,
                     'role_id' => $_roleIds,
-                    'created_at' => Carbon::now()->timezone(config('app')['default_timezone'])->timestamp,
-                    'updated_at' => Carbon::now()->timezone(config('app')['default_timezone'])->timestamp
+                    'created_at' => Carbon::now()->timezone(config('app.default_timezone'))->timestamp,
+                    'updated_at' => Carbon::now()->timezone(config('app.default_timezone'))->timestamp
                 ];
             }
             if (count($insert)) {

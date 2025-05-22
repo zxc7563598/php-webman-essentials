@@ -59,7 +59,7 @@ function fail($request, $code = 500, $data = [], $message = ''): Response
  */
 function sublog($paths, $title, $message, $context): void
 {
-    $date = Carbon::now()->timezone(config('app')['default_timezone'])->format('Y-m-d');
+    $date = Carbon::now()->timezone(config('app.default_timezone'))->format('Y-m-d');
     $log = new Logger([
         new Handlers\FileHandler(runtime_path("logs/{$date}/{$paths}")),
         new Handlers\ConsoleHandler()
@@ -122,7 +122,7 @@ function sortTree(array $tree): array
 function getImageUrl($str): string
 {
     if (strpos($str, 'http://') === false && strpos($str, 'https://') === false) {
-        $str = config('app')['image_url'] . '/' . $str;
+        $str = config('app.image_url') . '/' . $str;
     }
     return $str;
 }
