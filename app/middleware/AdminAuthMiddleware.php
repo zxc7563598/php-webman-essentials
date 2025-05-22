@@ -3,6 +3,7 @@
 namespace app\middleware;
 
 use app\service\AdminAuthService;
+use app\utils\AdminCache;
 use Carbon\Carbon;
 use Webman\MiddlewareInterface;
 use Webman\Http\Response;
@@ -22,16 +23,16 @@ class AdminAuthMiddleware implements MiddlewareInterface
             return fail($request, 900001);
         }
         // 验证签名
-        if (md5(config('app')['sign_key'] . $param['timestamp']) != $param['sign']) {
+        if (md5(config('app.sign_key') . $param['timestamp']) != $param['sign']) {
             return fail($request, 900002);
         }
         // 验证时间是否正确
-        $difference = Carbon::now()->timezone(config('app')['default_timezone'])->diffInSeconds(Carbon::parse((int)$param['timestamp'])->timezone(config('app')['default_timezone']));
+        $difference = Carbon::now()->timezone(config('app.default_timezone'))->diffInSeconds(Carbon::parse((int)$param['timestamp'])->timezone(config('app.default_timezone')));
         if ($difference > 60) {
             return fail($request, 900003);
         }
         // 解密数据
-        $data = openssl_decrypt($param['en_data'], 'aes-128-cbc', config('app')['aes_key'], 0, config('app')['aes_iv']);
+        $data = openssl_decrypt($param['en_data'], 'aes-128-cbc', config('app.aes_key'), 0, config('app.aes_iv'));
         if (!$data) {
             return fail($request, 900004);
         }
@@ -58,7 +59,7 @@ class AdminAuthMiddleware implements MiddlewareInterface
                 $request->admins = $loginCheck;
             }
         }
-        if (config('app')['debug'] == 1) {
+        if (config('app.debug') == 1) {
             sublog('接口调用', $route->getName(), $request->method(), [
                 'data' => $request->data,
                 'admins' => $request->admins
@@ -69,8 +70,7 @@ class AdminAuthMiddleware implements MiddlewareInterface
 
     public static function loginCheck($token): ?array
     {
-        $cache = AdminAuthService::getCache();
-        $admins = $cache->get($token);
+        $admins = AdminCache::get()->get($token);
         return !empty($admins) ? json_decode($admins, true) : 900009;
     }
 }
