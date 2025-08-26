@@ -43,7 +43,7 @@
     "workerman/crontab": "^1.0",
     "revolt/event-loop": "^1.0",
     "robmorgan/phinx": "^0.16.6",
-    "hejunjie/encrypted-request": "^0.0.1"
+    "hejunjie/encrypted-request": "^1.0"
   },
   "suggest": {
     "ext-event": "For better performance. "
