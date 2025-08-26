@@ -14,4 +14,5 @@ return [
     900009 => "Authentication failed", // 身份验证失败
     900010 => "Role does not exist", // 角色不存在
     900011 => "Permission does not exist", // 权限不存在
+    900012 => "Invalid request method", // 请求方法不合法
 ];

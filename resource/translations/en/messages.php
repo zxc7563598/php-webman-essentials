@@ -2,7 +2,7 @@
 
 return [
     'success' => 'success',
-    
+
     "Invalid request parameters" => "Invalid request parameters",
     "Signature verification failed" => "Signature verification failed",
     "Expired access token" => "Expired access token",
@@ -14,6 +14,7 @@ return [
     "Authentication failed" => "Authentication failed",
     "Role does not exist" => "Role does not exist",
     "Permission does not exist" => "Permission does not exist",
+    "Invalid request method" => "Invalid request method",
 
     'disable' => 'disable',
     'enable' => 'enable',
