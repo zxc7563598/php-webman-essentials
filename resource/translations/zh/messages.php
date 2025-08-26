@@ -14,6 +14,7 @@ return [
     "Authentication failed" => "身份验证失败",
     "Role does not exist" => "角色不存在",
     "Permission does not exist" => "权限不存在",
+    "Invalid request method" => "请求方法不合法",
 
     'disable' => '禁用',
     'enable' => '启用',

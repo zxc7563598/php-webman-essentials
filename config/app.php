@@ -27,8 +27,7 @@ return [
     'controller_reuse' => false,
     'aes_key' => getenv('AES_KEY'),
     'aes_iv' => getenv('AES_IV'),
-    'aes_key' => getenv('AES_KEY'),
-    'sign_key' => getenv('SIGN_KEY'),
+    'app_key' => getenv('APP_KEY'),
     'app_url' => getenv('APP_URL'),
     'image_url' => getenv('IMAGE_URL')
 ];
