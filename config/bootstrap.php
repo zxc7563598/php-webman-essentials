@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of webman.
  *
@@ -14,4 +15,6 @@
 
 return [
     support\bootstrap\Session::class,
+    app\bootstrap\RsaKeyGenerator::class,
+    app\bootstrap\CacheInjection::class
 ];
