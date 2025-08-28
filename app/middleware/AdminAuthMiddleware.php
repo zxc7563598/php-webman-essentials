@@ -20,9 +20,11 @@ class AdminAuthMiddleware implements MiddlewareInterface
         // 获取请求参数
         $param = $request->all();
         // 验证请求信息
-        $encrypted = new EncryptedRequestHandler();
+        $encrypted = new EncryptedRequestHandler([
+            'RSA_PRIVATE_KEY' => file_get_contents(base_path('private_key.pem'))
+        ]);
         try {
-            $request->data = $encrypted->handle($param['en_data'] ?? '', $param['timestamp'] ?? '', $param['sign'] ?? '');
+            $request->data = $encrypted->handle($param['en_data'] ?? '', $param['enc_payload'] ?? '', $param['timestamp'] ?? '', $param['sign'] ?? '');
         } catch (\Exception $e) {
             return fail($request, 900012, [], $e->getMessage());
         }

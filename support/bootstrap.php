@@ -13,11 +13,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-use app\cache\AdminLoginCache;
-use app\utils\AdminCache;
 use Dotenv\Dotenv;
-use Hejunjie\Cache\FileCache;
-use Hejunjie\Cache\RedisCache;
 use support\Log;
 use Webman\Bootstrap;
 use Webman\Config;
@@ -141,22 +137,3 @@ foreach (Util::scanDir($directory) as $path) {
     }
 }
 Route::load($paths);
-
-// 自定义注入
-$cache = new RedisCache(
-    new FileCache(
-        new AdminLoginCache(),
-        runtime_path('admin/login'),
-        (3600 * 24 * 7)
-    ),
-    [
-        'host' => config('redis.default.host'),
-        'port' => config('redis.default.port'),
-        'password' => !empty(config('redis.default.password')) ? config('redis.default.password') : null,
-        'db' => config('redis.default.database'),
-        'ttl' => (3600 * 24),
-    ],
-    'admin:token:',
-    true
-);
-AdminCache::set($cache);

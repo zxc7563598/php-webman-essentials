@@ -25,9 +25,6 @@ return [
     'runtime_path' => base_path(false) . DIRECTORY_SEPARATOR . 'runtime',
     'controller_suffix' => 'Controller',
     'controller_reuse' => false,
-    'aes_key' => getenv('AES_KEY'),
-    'aes_iv' => getenv('AES_IV'),
-    'app_key' => getenv('APP_KEY'),
     'app_url' => getenv('APP_URL'),
     'image_url' => getenv('IMAGE_URL')
 ];
